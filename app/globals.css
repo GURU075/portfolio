@@ -491,7 +491,12 @@ footer a:focus-visible::after {
   max-width: 760px;
 }
 
-.contact-row a {
+.contact-actions {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.contact-trigger {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
@@ -499,21 +504,93 @@ footer a:focus-visible::after {
   gap: 8px;
   width: 160px;
   height: 160px;
+  border: 0;
   border-radius: 50%;
   background: var(--acid);
   color: var(--ink);
+  font-family: inherit;
   font-size: 16px;
   font-weight: 600;
+  cursor: pointer;
   transition: transform .25s ease;
 }
 
-.contact-row a:hover,
-.contact-row a:focus-visible {
+.contact-trigger:hover,
+.contact-trigger:focus-visible {
   transform: rotate(6deg) scale(1.03);
 }
 
-.contact-row a span {
+.contact-trigger span:last-child {
   font-size: 22px;
+}
+
+.contact-menu {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 18px);
+  z-index: 2;
+  width: min(310px, calc(100vw - 48px));
+  padding: 20px;
+  border: 1px solid rgba(21, 23, 25, .14);
+  border-radius: 3px;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 18px 50px rgba(17, 20, 65, .24);
+}
+
+.contact-menu::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 57px;
+  width: 14px;
+  height: 14px;
+  border-right: 1px solid rgba(21, 23, 25, .14);
+  border-bottom: 1px solid rgba(21, 23, 25, .14);
+  background: var(--paper);
+  transform: translateY(-7px) rotate(45deg);
+}
+
+.contact-menu p {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.contact-menu button,
+.contact-menu a {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-geist-mono);
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.contact-menu button:hover,
+.contact-menu button:focus-visible,
+.contact-menu a:hover,
+.contact-menu a:focus-visible {
+  color: var(--blue);
+}
+
+.contact-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 .contact-foot {
@@ -667,9 +744,19 @@ footer {
     flex-direction: column;
   }
 
-  .contact-row a {
+  .contact-trigger {
     width: 126px;
     height: 126px;
+  }
+
+  .contact-menu {
+    right: auto;
+    left: 0;
+  }
+
+  .contact-menu::after {
+    right: auto;
+    left: 55px;
   }
 
   .contact-foot,

@@ -1,3 +1,5 @@
+import ContactActions from "./ContactActions";
+
 const skills = [
   "Java",
   "Spring Boot",
@@ -192,9 +194,7 @@ export default function Home() {
         <p className="eyebrow light">Next chapter</p>
         <div className="contact-row">
           <h2>Have a role in mind?</h2>
-          <a href="mailto:gururajyadav.07@gmail.com">
-            Let&apos;s talk <span aria-hidden="true">↗</span>
-          </a>
+          <ContactActions />
         </div>
         <div className="contact-foot">
           <p>
