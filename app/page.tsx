@@ -19,30 +19,35 @@ const skills = [
 const projects = [
   {
     number: "01",
-    title: "OrderFlow",
-    type: "Distributed microservices backend",
+    title: "SeatSync",
+    type: "Full-stack · Distributed ticketing platform",
     description:
-      "A resilient order-processing system designed around clear service boundaries, asynchronous events, and observable failure recovery.",
-    stack: ["Java", "Spring Boot", "Microservices", "Kafka", "PostgreSQL"],
-    outcome: "Reliable workflows",
+      "A real-time event booking experience with live seat inventory, atomic Redis locks, idempotent checkout, and Kafka-powered payment confirmation across Spring Boot microservices.",
+    stack: [
+      "React",
+      "TypeScript",
+      "Spring Boot",
+      "PostgreSQL",
+      "Redis",
+      "Kafka",
+    ],
+    outcome: "Conflict-safe booking",
   },
   {
     number: "02",
-    title: "SignalDesk",
-    type: "Operations dashboard",
+    title: "QueryPilot",
+    type: "Full-stack · AI database workspace",
     description:
-      "A focused dashboard that turns service health and business events into fast, readable decisions for operations teams.",
-    stack: ["React", "TypeScript", "REST APIs", "Docker"],
-    outcome: "Faster diagnosis",
-  },
-  {
-    number: "03",
-    title: "DataBridge",
-    type: "Integration platform",
-    description:
-      "A configurable data pipeline for validating, transforming, and synchronizing records across independent systems.",
-    stack: ["Java", "MongoDB", "SQL", "CI/CD"],
-    outcome: "Clean integrations",
+      "A natural-language database assistant that discovers schemas, creates structured SQL plans, validates every statement, and requires explicit confirmation before executing writes.",
+    stack: [
+      "React",
+      "Java",
+      "Spring Boot",
+      "Spring AI",
+      "JSqlParser",
+      "Docker",
+    ],
+    outcome: "Safer database access",
   },
 ];
 
@@ -124,8 +129,8 @@ export default function Home() {
             <h2>Built to solve,<br />not just to ship.</h2>
           </div>
           <p>
-            A selection of systems and product ideas that show how I approach
-            architecture, implementation, and impact.
+            Two production-minded full-stack systems that show how I approach
+            architecture, reliability, security, and user experience.
           </p>
         </div>
 
