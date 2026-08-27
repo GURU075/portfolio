@@ -235,16 +235,16 @@ footer a:focus-visible::after {
 }
 
 .statement {
-  padding: 100px 0 78px;
+  padding: 84px 0 32px;
   border-top: 1px solid var(--line);
 }
 
 .statement-copy {
-  max-width: 1000px;
-  margin: 52px 0 76px;
-  font-size: clamp(36px, 5.2vw, 70px);
-  line-height: 1.03;
-  letter-spacing: -.055em;
+  max-width: 940px;
+  margin: 38px 0 52px;
+  font-size: clamp(34px, 4.4vw, 60px);
+  line-height: 1.08;
+  letter-spacing: -.05em;
 }
 
 .statement-meta {
@@ -266,7 +266,7 @@ footer a:focus-visible::after {
 }
 
 .work {
-  padding: 120px 0;
+  padding: 72px 0 112px;
 }
 
 .section-heading {
@@ -274,7 +274,7 @@ footer a:focus-visible::after {
   grid-template-columns: 1.6fr .7fr;
   gap: 80px;
   align-items: end;
-  margin-bottom: 70px;
+  margin-bottom: 56px;
 }
 
 .section-heading h2,
@@ -692,11 +692,11 @@ footer {
   .statement,
   .work,
   .skills {
-    padding: 82px 0;
+    padding: 68px 0;
   }
 
   .statement-copy {
-    margin: 40px 0 56px;
+    margin: 32px 0 44px;
   }
 
   .statement-meta {
