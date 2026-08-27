@@ -1,4 +1,5 @@
 import ContactActions from "./ContactActions";
+import ProjectShowcase from "./ProjectShowcase";
 
 const skills = [
   "Java",
@@ -14,41 +15,6 @@ const skills = [
   "Docker",
   "Git",
   "CI/CD",
-];
-
-const projects = [
-  {
-    number: "01",
-    title: "SeatSync",
-    type: "Full-stack · Distributed ticketing platform",
-    description:
-      "A real-time event booking experience with live seat inventory, atomic Redis locks, idempotent checkout, and Kafka-powered payment confirmation across Spring Boot microservices.",
-    stack: [
-      "React",
-      "TypeScript",
-      "Spring Boot",
-      "PostgreSQL",
-      "Redis",
-      "Kafka",
-    ],
-    outcome: "Conflict-safe booking",
-  },
-  {
-    number: "02",
-    title: "QueryPilot",
-    type: "Full-stack · AI database workspace",
-    description:
-      "A natural-language database assistant that discovers schemas, creates structured SQL plans, validates every statement, and requires explicit confirmation before executing writes.",
-    stack: [
-      "React",
-      "Java",
-      "Spring Boot",
-      "Spring AI",
-      "JSqlParser",
-      "Docker",
-    ],
-    outcome: "Safer database access",
-  },
 ];
 
 const principles = [
@@ -134,25 +100,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="project-list">
-          {projects.map((project) => (
-            <article className="project" key={project.number}>
-              <div className="project-number">{project.number}</div>
-              <div className="project-main">
-                <p className="project-type">{project.type}</p>
-                <h3>{project.title}</h3>
-                <p className="project-description">{project.description}</p>
-                <ul className="tag-list" aria-label={`${project.title} technologies`}>
-                  {project.stack.map((item) => <li key={item}>{item}</li>)}
-                </ul>
-              </div>
-              <div className="project-outcome">
-                <span>Outcome</span>
-                <strong>{project.outcome}</strong>
-              </div>
-            </article>
-          ))}
-        </div>
+        <ProjectShowcase />
       </section>
 
       <section className="about" id="about">
