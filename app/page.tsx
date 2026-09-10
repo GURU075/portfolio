@@ -1,5 +1,6 @@
 import ContactActions from "./ContactActions";
 import ProjectShowcase from "./ProjectShowcase";
+import ProfileLinks from "./ProfileLinks";
 
 const skills = [
   "Java",
@@ -38,7 +39,7 @@ export default function Home() {
       <nav className="nav shell" aria-label="Primary navigation">
         <a className="brand" href="#top" aria-label="Gururaj Yadav portfolio home">
           <span className="brand-mark">G</span>
-          <span>GURURAJ YADAV / PORTFOLIO</span>
+          <span>GURURAJ YADAV<span className="brand-subtitle">SOFTWARE ENGINEER</span></span>
         </a>
         <div className="nav-links">
           <a href="#work">Work</a>
@@ -56,23 +57,33 @@ export default function Home() {
           <span>Software Engineer</span>
           <span>India · 2026</span>
         </div>
+        <div className="hero-layout"><div className="hero-copy">
+        <p className="hero-intro">Hi, I’m Gururaj <span aria-hidden="true">↗</span></p>
         <h1>
-          I build software
+          Thoughtful code.
           <br />
-          that stays <em>useful.</em>
+          <em>Useful software.</em>
         </h1>
         <div className="hero-bottom">
           <p>
-            I&apos;m Gururaj Yadav, a software engineer focused on dependable backend
-            systems and thoughtful full-stack experiences.
+            I build dependable backend systems and thoughtful full-stack
+            experiences, connecting solid engineering with the people who use it.
           </p>
           <a className="circle-link" href="#work" aria-label="View selected work">
-            <span>View work</span>
-            <b aria-hidden="true">↓</b>
+            <span>View selected work</span>
+            <b aria-hidden="true">↗</b>
           </a>
+          <ProfileLinks />
         </div>
-        <div className="hero-orbit orbit-one" aria-hidden="true" />
-        <div className="hero-orbit orbit-two" aria-hidden="true" />
+        </div><div className="system-visual" aria-label="System architecture: client requests flow through an API gateway to services and data storage">
+          <div className="visual-caption"><span>THE BIGGER PICTURE</span><span>↗</span></div>
+          <div className="system-rings" aria-hidden="true"><i /><i /><i /></div>
+          <div className="system-node node-client"><span>01 / EXPERIENCE</span><strong>Client application</strong><small>React · TypeScript</small></div>
+          <div className="system-node node-api"><span>02 / CONNECTION</span><strong>API gateway <b>↗</b></strong><small>Clear contracts. Reliable delivery.</small></div>
+          <div className="system-node node-data"><span>03 / FOUNDATION</span><strong>Services & data</strong><small>Spring Boot · PostgreSQL · Kafka</small></div>
+          <div className="visual-footer"><span className="signal-dot" /> BUILT TO WORK TOGETHER</div>
+        </div></div>
+        <div className="hero-index"><span>SCROLL TO EXPLORE ↓</span><span>BACKEND THINKING. FULL-STACK CRAFT.</span><span>01 — 05</span></div>
       </header>
 
       <section className="statement shell" aria-label="Professional summary">

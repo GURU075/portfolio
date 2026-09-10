@@ -74,10 +74,25 @@ export default function ProjectShowcase() {
 
         return (
           <article
-            className={`project${isOpen ? " is-expanded" : ""}`}
+            className={`project project-${project.number}${isOpen ? " is-expanded" : ""}`}
             key={project.number}
           >
             <div className="project-number">{project.number}</div>
+            <div className={`project-preview preview-${project.number}`} role="img" aria-label={project.number === "01" ? "Illustrative SeatSync seat selection preview" : "Illustrative QueryPilot SQL planning preview"}>
+              <div className="preview-bar"><span>{project.title}<b> / workspace</b></span><span>● ● ●</span></div>
+              {project.number === "01" ? <div className="seat-preview">
+                <div className="preview-title"><span>LIVE INVENTORY</span><strong>Your evening. Your seat.</strong></div>
+                <div className="stage">S T A G E</div>
+                <div className="seat-map" aria-hidden="true">{Array.from({length: 48}, (_, index) => <i key={index} className={index === 27 || index === 28 ? "selected" : index % 7 === 0 || index % 11 === 0 ? "reserved" : ""} />)}</div>
+                <div className="preview-bottom"><span><i /> Available <i className="selected" /> Selected</span><span>2 seats reserved ↗</span></div>
+              </div> : <div className="query-preview">
+                <div className="preview-title"><span>NATURAL LANGUAGE → SQL</span><strong>Ask better questions.</strong></div>
+                <div className="query-prompt">Show the five most recent bookings <span>↵</span></div>
+                <div className="query-code"><span>01 <b>SELECT</b> id, event_name, created_at</span><span>02 <b>FROM</b> bookings</span><span>03 <b>ORDER BY</b> created_at <b>DESC</b></span><span>04 <b>LIMIT</b> <em>5</em>;</span></div>
+                <div className="preview-bottom"><span>✓ Read-only query</span><span>Policy validated</span></div>
+              </div>}
+              <span className="preview-note">INTERFACE CONCEPT</span>
+            </div>
             <div className="project-main">
               <p className="project-type">{project.type}</p>
               <h3>{project.title}</h3>
