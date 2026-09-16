@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import RecallGallery from "./RecallGallery";
+import recallQueue from "../public/projects/recall/revision-queue.png";
 
 const projects = [
   {
@@ -121,7 +124,7 @@ export default function ProjectShowcase() {
             key={project.id}
           >
             <div className="project-number">{number}</div>
-            <div className={`project-preview preview-${project.id}`} role="img" aria-label={project.id === "seatsync" ? "Illustrative SeatSync seat selection preview" : project.id === "recall" ? "Illustrative Recall 10-minute queue: Binary Search and Linked List Cycle fit the budget; Spring Transactions remains optional" : "Illustrative QueryPilot SQL planning preview"}>
+            <div className={`project-preview preview-${project.id}`} role="img" aria-label={project.id === "seatsync" ? "Illustrative SeatSync seat selection preview" : project.id === "recall" ? "Actual Recall application showing the daily revision queue and optional reviews within a 20-minute study budget" : "Illustrative QueryPilot SQL planning preview"}>
               <div className="preview-bar"><span>{project.title}<b> / workspace</b></span><span>● ● ●</span></div>
               {project.id === "seatsync" ? <div className="seat-preview">
                 <div className="preview-title"><span>LIVE INVENTORY</span><strong>Your evening. Your seat.</strong></div>
@@ -130,20 +133,15 @@ export default function ProjectShowcase() {
                 <div className="preview-bottom"><span><i /> Available <i className="selected" /> Selected</span><span>2 seats reserved ↗</span></div>
               </div> : project.id === "recall" ? <div className="recall-preview">
                 <div className="preview-title"><span>YOUR DAILY FOCUS</span><strong>A little time. A clear plan.</strong></div>
-                <div className="recall-budgets" aria-hidden="true"><span className="is-selected">10 min</span><span>20 min</span><span>30 min</span></div>
-                <div className="recall-queue">
-                  <div><span className="recall-order">01</span><span><strong>Binary Search</strong><small>Approach · 3 days overdue · Forgot</small></span><b>5 min</b></div>
-                  <div><span className="recall-order">02</span><span><strong>Linked List Cycle</strong><small>Approach · 2 days overdue · Clear</small></span><b>5 min</b></div>
-                </div>
-                <div className="recall-optional"><span>Optional · Spring Transactions</span><span>10 min</span></div>
-                <div className="preview-bottom"><span>2 reviews · 10 min estimated</span><span>Ready to focus ↗</span></div>
+                <Image className="recall-cover" src={recallQueue} alt="" sizes="(max-width: 800px) 90vw, 600px" />
+                <div className="preview-bottom"><span>Daily queue · Optional reviews</span><span>20-minute budget</span></div>
               </div> : <div className="query-preview">
                 <div className="preview-title"><span>NATURAL LANGUAGE → SQL</span><strong>Ask better questions.</strong></div>
                 <div className="query-prompt">Show the five most recent bookings <span>↵</span></div>
                 <div className="query-code"><span>01 <b>SELECT</b> id, event_name, created_at</span><span>02 <b>FROM</b> bookings</span><span>03 <b>ORDER BY</b> created_at <b>DESC</b></span><span>04 <b>LIMIT</b> <em>5</em>;</span></div>
                 <div className="preview-bottom"><span>✓ Read-only query</span><span>Policy validated</span></div>
               </div>}
-              <span className="preview-note">INTERFACE CONCEPT</span>
+              <span className="preview-note">{project.id === "recall" ? "ACTUAL APPLICATION" : "INTERFACE CONCEPT"}</span>
             </div>
             <div className="project-main">
               <p className="project-type">{project.type}</p>
@@ -179,6 +177,8 @@ export default function ProjectShowcase() {
                   <p>Inside the build</p>
                   <span>{project.status}</span>
                 </div>
+
+                {project.id === "recall" && <RecallGallery />}
 
                 <div className="project-detail-grid">
                   <section>
