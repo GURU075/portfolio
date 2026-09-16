@@ -106,8 +106,9 @@ export default function Home() {
             <h2>Built to solve,<br />not just to ship.</h2>
           </div>
           <p>
-            Two production-minded full-stack systems that show how I approach
-            architecture, reliability, security, and user experience.
+            Three full-stack projects spanning distributed systems, focused
+            learning, and safer database workflows—built with attention to
+            architecture, reliability, and user experience.
           </p>
         </div>
 

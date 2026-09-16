@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const projects = [
   {
-    number: "01",
+    id: "seatsync",
     title: "SeatSync",
     type: "Full-stack · Distributed ticketing platform",
     description:
@@ -33,7 +33,49 @@ const projects = [
       "React → API Gateway → Event, Venue, Show, Inventory, Booking & Payment services → PostgreSQL · Redis · Kafka",
   },
   {
-    number: "02",
+    id: "recall",
+    title: "Recall",
+    type: "Full-stack · Study revision tracker",
+    description:
+      "A study planner that turns 10-, 20-, or 30-minute budgets into prioritized revision sessions. Combines active recall, independent DSA practice schedules, retry-safe review updates, and a Windows desktop launch workflow.",
+    stack: ["Java 17", "Spring Boot", "React", "TypeScript", "PostgreSQL", "Flyway", "PowerShell"],
+    outcome: "Focused, time-budgeted revision",
+    status: "Single-user local application",
+    challenge:
+      "Help learners decide what to revise as their topic library grows, prioritizing forgotten and overdue material within limited study time. Keep review history and schedules consistent when requests are retried or sessions overlap.",
+    approach:
+      "A modular Spring Boot monolith separates topics, reviews, scheduling, and settings. Pure scheduling logic builds deterministic queues, while unique submission IDs, database locking, stale-state validation, and a transaction keep review history and schedule updates consistent. Flyway migrations and Hibernate validation maintain the PostgreSQL schema.",
+    features: [
+      "10-, 20-, or 30-minute focus queues that prioritize overdue topics and weaker recall",
+      "Question-first recall sessions with Forgot, Partial, and Clear ratings",
+      "Independent Approach and Coding schedules and duration estimates for DSA practice",
+      "Topic search, filtering, archiving, restoration, and persistent review history",
+      "Timezone-aware review dates and configurable successful-recall intervals",
+      "Windows shortcuts for launch and shutdown, with process tracking and startup logs",
+    ],
+    architecture:
+      "Windows shortcut → PowerShell launcher → dedicated local PostgreSQL + packaged Spring Boot / React application → readiness checks → browser",
+    details: [
+      {
+        title: "How a focus session is selected",
+        text: "Priority = (overdue days × 2) + recall bonus: Forgot adds 8, Partial adds 4, and Clear or no previous rating adds 0. Due sessions are ranked by score, then earlier due date and a stable identifier. The planner includes each session that fits the remaining estimated budget; others remain optional. A started session keeps its original queue.",
+      },
+      {
+        title: "A predictable review schedule",
+        text: "Forgot schedules a review for the next day and resets progression. Partial schedules it two days later without advancing. Clear advances through configurable intervals, defaulting to 3, 7, 14, 30, and 60 days. Dates use the configured timezone. These are rule-based product defaults; the budget uses estimates, so actual study time can vary.",
+      },
+      {
+        title: "From source code to desktop workflow",
+        text: "PowerShell scripts and Windows shortcuts start a dedicated local PostgreSQL instance, launch the packaged Spring Boot and React application, verify readiness, and open the browser. Process tracking, shutdown controls, and startup logging support repeatable local use.",
+      },
+      {
+        title: "Verification and scope",
+        text: "The project verification record reports 12 backend tests passing against H2 and PostgreSQL, plus frontend type checking, a production build, and desktop and mobile browser checks. Coverage includes concurrent retries, stale states, budget fitting, timezone boundaries, and independent DSA modes. Designed for one user on a trusted local machine; authentication, cloud sync, and notifications are outside the current scope. Docker Compose configuration was validated, but a full container launch was not verified.",
+      },
+    ],
+  },
+  {
+    id: "querypilot",
     title: "QueryPilot",
     type: "Full-stack · AI database workspace",
     description:
@@ -68,23 +110,33 @@ export default function ProjectShowcase() {
 
   return (
     <div className="project-list">
-      {projects.map((project) => {
-        const isOpen = openProject === project.number;
-        const detailsId = `project-${project.number}-details`;
+      {projects.map((project, index) => {
+        const number = String(index + 1).padStart(2, "0");
+        const isOpen = openProject === project.id;
+        const detailsId = `project-${project.id}-details`;
 
         return (
           <article
-            className={`project project-${project.number}${isOpen ? " is-expanded" : ""}`}
-            key={project.number}
+            className={`project project-${project.id}${isOpen ? " is-expanded" : ""}`}
+            key={project.id}
           >
-            <div className="project-number">{project.number}</div>
-            <div className={`project-preview preview-${project.number}`} role="img" aria-label={project.number === "01" ? "Illustrative SeatSync seat selection preview" : "Illustrative QueryPilot SQL planning preview"}>
+            <div className="project-number">{number}</div>
+            <div className={`project-preview preview-${project.id}`} role="img" aria-label={project.id === "seatsync" ? "Illustrative SeatSync seat selection preview" : project.id === "recall" ? "Illustrative Recall 10-minute queue: Binary Search and Linked List Cycle fit the budget; Spring Transactions remains optional" : "Illustrative QueryPilot SQL planning preview"}>
               <div className="preview-bar"><span>{project.title}<b> / workspace</b></span><span>● ● ●</span></div>
-              {project.number === "01" ? <div className="seat-preview">
+              {project.id === "seatsync" ? <div className="seat-preview">
                 <div className="preview-title"><span>LIVE INVENTORY</span><strong>Your evening. Your seat.</strong></div>
                 <div className="stage">S T A G E</div>
                 <div className="seat-map" aria-hidden="true">{Array.from({length: 48}, (_, index) => <i key={index} className={index === 27 || index === 28 ? "selected" : index % 7 === 0 || index % 11 === 0 ? "reserved" : ""} />)}</div>
                 <div className="preview-bottom"><span><i /> Available <i className="selected" /> Selected</span><span>2 seats reserved ↗</span></div>
+              </div> : project.id === "recall" ? <div className="recall-preview">
+                <div className="preview-title"><span>YOUR DAILY FOCUS</span><strong>A little time. A clear plan.</strong></div>
+                <div className="recall-budgets" aria-hidden="true"><span className="is-selected">10 min</span><span>20 min</span><span>30 min</span></div>
+                <div className="recall-queue">
+                  <div><span className="recall-order">01</span><span><strong>Binary Search</strong><small>Approach · 3 days overdue · Forgot</small></span><b>5 min</b></div>
+                  <div><span className="recall-order">02</span><span><strong>Linked List Cycle</strong><small>Approach · 2 days overdue · Clear</small></span><b>5 min</b></div>
+                </div>
+                <div className="recall-optional"><span>Optional · Spring Transactions</span><span>10 min</span></div>
+                <div className="preview-bottom"><span>2 reviews · 10 min estimated</span><span>Ready to focus ↗</span></div>
               </div> : <div className="query-preview">
                 <div className="preview-title"><span>NATURAL LANGUAGE → SQL</span><strong>Ask better questions.</strong></div>
                 <div className="query-prompt">Show the five most recent bookings <span>↵</span></div>
@@ -110,7 +162,7 @@ export default function ProjectShowcase() {
                 type="button"
                 aria-expanded={isOpen}
                 aria-controls={detailsId}
-                onClick={() => setOpenProject(isOpen ? null : project.number)}
+                onClick={() => setOpenProject(isOpen ? null : project.id)}
               >
                 <span>{isOpen ? "Close case study" : "Explore project"}</span>
                 <span aria-hidden="true">{isOpen ? "−" : "+"}</span>
@@ -152,6 +204,16 @@ export default function ProjectShowcase() {
                   <span>System flow</span>
                   <p>{project.architecture}</p>
                 </div>
+                {project.details && (
+                  <div className="project-detail-grid recall-engineering">
+                    {project.details.map((detail) => (
+                      <section key={detail.title}>
+                        <h4>{detail.title}</h4>
+                        <p>{detail.text}</p>
+                      </section>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
           </article>
